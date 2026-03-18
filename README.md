@@ -21,7 +21,7 @@ Inba grounds every answer in three knowledge bases:
 
 ---
 
-## Features
+## Features that Chatbot can perform
 
 ### 🔍 Deduction Analysis
 Inba identifies whether a deduction made by a TPA is legitimate or contestable. It cross-references the rejection reason against IRDAI Standardization Guidelines, flagging cases such as:
@@ -51,9 +51,23 @@ Using the TPA Rejection Mapping knowledge base, Inba can:
 ### ✉️ Escalation Drafting
 On request, Inba can help draft a formal objection or grievance letter to send to the TPA or insurer, citing relevant IRDAI circulars and policy clauses.
 
-### 🌐 Multilingual Awareness
-Inba responds only in English and politely requests users to rephrase queries in English if another language is used — ensuring consistent, accurate responses.
 
+## Future Features
+
+### Scraping from IRDAI Circulars
+Scraping from IRDAI Circulars to update the knowledge base on regular basis.
+
+### 🌐 Multilingual Awareness
+Inba currently responds only in English but could be extended to other languages in the future.
+
+### Policy upload
+Allow users to upload their policy documents to the knowledge base to get customized responses based on their policy.
+
+### Whatsapp Integration
+Inba could be integrated with Whatsapp to provide a more seamless experience for users.
+
+### 📊 Analytics and Insights
+ Inba could be extended to provide analytics on the most common TPA rejection codes and reasons. Create Awareness among public for the larger issue of TPA rejection.
 ---
 
 ## Tech Stack
