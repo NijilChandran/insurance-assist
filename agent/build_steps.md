@@ -28,20 +28,60 @@
 
 ---
 
-## Phase 3 — Widget Embed Code (`chatbot.js`)
+## Phase 3 — Chatbot Creation from the Agent
 
-1. In the agent dashboard, click **Embed** or **Share**
-2. Copy the `<script>` tag — it looks like:
+Once the agent is deployed, create a **Chatbot** from it to generate a publicly embeddable widget.
+
+### 3.1 — Open Chatbot Settings
+1. In the agent dashboard, select your deployed agent (`inba-deductionhelper`)
+2. Click **Chatbots** → **Create Chatbot**
+
+### 3.2 — Make the Endpoint Public
+1. Under **Access**, set visibility to **Public**
+   - This allows the widget to be embedded on any web page without authentication
+   - The endpoint URL will be: `https://<agent-domain>/static/chatbot/widget.js`
+
+
+### 3.3 — Customise Appearance
+Fill in the branding fields:
+
+| Field | Value used | Attribute in script tag |
+|---|---|---|
+| **Chatbot Name** | `inba-deductionhelper Chatbot` | `data-name` |
+| **Primary Color** | `#031B4E` (dark navy) | `data-primary-color` |
+| **Secondary Color** | `#E5E8ED` (light grey) | `data-secondary-color` |
+| **Button Background** | `#0061EB` (bright blue) | `data-button-background-color` |
+| **Default / Starting Message** | `Hello! I'm Inba. How can I help you with your insurance claim today?` | `data-starting-message` |
+| **Logo** | Default agent SVG from DO | `data-logo` |
+
+### 3.4 — Set Allowed Origin Domains
+1. Under **Allowed Origins**, add your GitHub Pages domain:
+   ```
+   https://nijilchandran.github.io
+   ```
+2. This restricts the widget so it only loads from your authorised domain — prevents others from embedding your chatbot on their sites
+3. For local testing also add: `http://localhost:8080`
+
+
+
+### 3.5 — Save and Copy the Embed Script
+1. Click **Save Chatbot**
+2. Click **Embed** → copy the generated `<script>` tag:
    ```html
    <script async
      src="https://<agent-domain>/static/chatbot/widget.js"
      data-agent-id="<AGENT_ID>"
      data-chatbot-id="<CHATBOT_ID>"
-     ...>
+     data-name="inba-deductionhelper Chatbot"
+     data-primary-color="#031B4E"
+     data-secondary-color="#E5E8ED"
+     data-button-background-color="#0061EB"
+     data-starting-message="Hello! I'm Inba. How can I help you with your insurance claim today?"
+     data-logo="https://<agent-domain>/static/chatbot/icons/default-agent.svg">
    </script>
    ```
-3. Save this as `chatbot.js` in the repository (for reference — the actual embed goes in `index.html`)
-4. Customise colors using the `data-primary-color`, `data-secondary-color`, and `data-button-background-color` attributes to match branding
+3. Save a copy as `chatbot.js` in the repository root (reference only)
+4. Paste the script tag at the bottom of `<body>` in `index.html`
 
 ---
 
@@ -72,4 +112,3 @@
 | Chatbot ID | `iTabyc1nI15PjUFWZXPu8Bo1tEsRaCdu` |
 | Agent Domain | `dou3ota6tj4frnt5zfltu2fv.agents.do-ai.run` |
 
-> ⚠️ These are **public widget embed keys** — they identify the widget but do not grant API access. Your actual DO API tokens must never be committed. See `SAFETY.md`.
