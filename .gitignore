@@ -1,0 +1,15 @@
+# Environment & secrets — never commit these
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+secrets/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
