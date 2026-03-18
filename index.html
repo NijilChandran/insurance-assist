@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Insurance Assistant — get instant help with your insurance claims, deductions, and queries powered by Inba." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://dou3ota6tj4frnt5zfltu2fv.agents.do-ai.run; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://dou3ota6tj4frnt5zfltu2fv.agents.do-ai.run; img-src 'self' data: https://dou3ota6tj4frnt5zfltu2fv.agents.do-ai.run;" />
+  <title>Insurance Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design Tokens ─────────────────────────────────── */
+    :root {
+      --brand-dark:   #031B4E;
+      --brand-blue:   #0061EB;
+      --brand-light:  #E5E8ED;
+      --bg:           #F4F7FB;
+      --surface:      #FFFFFF;
+      --text-primary: #111827;
+      --text-muted:   #6B7280;
+      --radius-lg:    1rem;
+      --radius-md:    0.5rem;
+      --shadow-card:  0 4px 24px rgba(3,27,78,0.08);
+      --transition:   0.25s ease;
+    }
+
+    /* ── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+    }
+
+    /* ── Full-width Responsive Grid ────────────────────── */
+    .page-grid {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ── Header ────────────────────────────────────────── */
+    header {
+      background: var(--brand-dark);
+      padding: 1.25rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    header svg { flex-shrink: 0; }
+    header h1 {
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.02em;
+    }
+    header p {
+      font-size: 0.85rem;
+      color: var(--brand-light);
+      margin-top: 0.15rem;
+    }
+
+    /* ── Hero / Main Content ──────────────────────────── */
+    main {
+      display: grid;
+      place-items: center;
+      padding: 3rem 1.5rem;
+    }
+    .hero {
+      text-align: center;
+      max-width: 640px;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--brand-blue);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideDown 0.4s ease both;
+    }
+    .hero h2 {
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      font-weight: 700;
+      color: var(--brand-dark);
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      animation: fadeSlideDown 0.5s ease 0.1s both;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      animation: fadeSlideDown 0.5s ease 0.2s both;
+    }
+
+    /* ── Feature Cards ─────────────────────────────────── */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+      width: 100%;
+      max-width: 800px;
+      animation: fadeSlideDown 0.5s ease 0.3s both;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(3,27,78,0.13);
+    }
+    .card-icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .card h3 { font-size: 0.95rem; font-weight: 600; color: var(--brand-dark); }
+    .card p  { font-size: 0.82rem; color: var(--text-muted); margin-top: 0.4rem; line-height: 1.5; }
+
+    /* ── CTA hint ──────────────────────────────────────── */
+    .cta-hint {
+      margin-top: 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    .cta-hint span { font-size: 1.2rem; }
+
+    /* ── Footer ────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px solid #E5E8ED;
+    }
+    footer a { color: var(--brand-blue); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── Animations ────────────────────────────────────── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-grid">
+
+    <!-- Header -->
+    <header>
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect width="36" height="36" rx="8" fill="#0061EB"/>
+        <path d="M18 8L10 13v7c0 4.4 3.4 8.5 8 9.5 4.6-1 8-5.1 8-9.5v-7l-8-5z" fill="white"/>
+      </svg>
+      <div>
+        <h1>Insurance Assistant</h1>
+        <p>Powered by Inba · AI-driven claim support</p>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+      <div class="hero">
+        <div class="hero-badge">Available 24 / 7</div>
+        <h2>Your Personal Insurance Guide</h2>
+        <p>
+          Ask Inba about claims, deductions, policy coverage, or any
+          insurance question — get instant, accurate answers without
+          waiting on hold.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">📋</div>
+          <h3>Claims Support</h3>
+          <p>Step-by-step guidance through the entire claims process.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💡</div>
+          <h3>Deduction Help</h3>
+          <p>Understand what deductions apply to your policy.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🔍</div>
+          <h3>Policy Queries</h3>
+          <p>Clarify coverage limits, exclusions, and renewal terms.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">⚡</div>
+          <h3>Instant Answers</h3>
+          <p>No hold music — get responses in seconds, any time.</p>
+        </div>
+      </div>
+
+      <p class="cta-hint">
+        <span>💬</span> Click the chat button at the bottom-right to start
+      </p>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      &copy; 2026 Insurance Assistant &nbsp;·&nbsp;
+      <a href="https://github.com/NijilChandran/insurance-assist" target="_blank" rel="noopener">Open Source on GitHub</a>
+      &nbsp;·&nbsp; MIT License
+    </footer>
+
+  </div>
+
+  <!-- Digital Ocean Chatbot Widget -->
+  <script async
+    src="https://dou3ota6tj4frnt5zfltu2fv.agents.do-ai.run/static/chatbot/widget.js"
+    data-agent-id="71c8fc0d-227e-11f1-b074-4e013e2ddde4"
+    data-chatbot-id="iTabyc1nI15PjUFWZXPu8Bo1tEsRaCdu"
+    data-name="inba-deductionhelper Chatbot"
+    data-primary-color="#031B4E"
+    data-secondary-color="#E5E8ED"
+    data-button-background-color="#0061EB"
+    data-starting-message="Hello! I'm Inba. How can I help you with your insurance claim today?"
+    data-logo="/static/chatbot/icons/default-agent.svg">
+  </script>
+</body>
+</html>
